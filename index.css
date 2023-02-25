@@ -1,0 +1,28 @@
+.flag {
+  width: 66px;
+  height: 40px;
+}
+
+.repeat-wrapper {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  width: 100px;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.blank {
+  margin-left: 4px;
+}
+
+.buttons,
+.big-button {
+  background: grey;
+  border: 1px solid black;
+}
+
+.big-button {
+  width: max-content;
+  height: 40px;
+}

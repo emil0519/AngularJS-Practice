@@ -1,13 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="myModule" lang="en">
+  <!-- using module, directive -->
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./Script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./index.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <title>Document</title>
   </head>
-  <body>
-    <div>10+20={{10+20}}</div>
+  <body ng-controller="myController">
+    <div class="text-xl text-[red]">
+      <!-- using controller -->
+      Employer first name: {{message.firstName}}
+    </div>
+    <div>Employer last name: {{message.lastName}}</div>
+    <div>Nationality: <img ng-src="{{message.flag}}" class="flag" /></div>
+    <!-- ng-src 避免404Error(與React if (fetchedResult===undefined)return<>/<>一樣) -->
+    <input
+      class="border-[2px] border-solid rounded-sm border-[black] mt-2 px-[2px] ml-2"
+      ng-model="newVar"
+      type="text"
+      placeholder="type here"
+    />
+    <br />
+    <!-- 新嘅model直接被創造 -->
+    <div>This is newVar => {{newVar}}</div>
+
+    <!-- 類似React的map，加上兩層結構 -->
+    <div ng-repeat="employee in employeeSalary">
+      <div>{{employee.firstName}} index is {{$index}}</div>
+      <div>
+        Likes: {{employee.likes}}
+        <button class="buttons" ng-click="addLikes(employee)">Like++</button>
+        <button class="buttons" ng-click="minusLikes(employee)">
+          Dislike++
+        </button>
+      </div>
+
+      <div class="blank" ng-repeat="stack in employee.techStack">
+        =>{{stack}} index is {{$parent.$index}}.{{$index}}
+      </div>
+    </div>
+    <button
+      ng-mouseenter="show()"
+      ng-mouseleave="disappear()"
+      class="big-button"
+    >
+      Try me
+    </button>
+    <div
+      ng-show="hover"
+      style="background-color: white; height: 50px; border: 1px solid black"
+    >
+      White block
+    </div>
+
+    <!-- ng-init load data when page load -->
+    <div class="mt-[5px]" ng-init="numbers=[1,2,3,4]">
+      <p>ng-init:{{numbers}}, can also get thorugh {{numbers[0]}}</p>
+    </div>
+
+    <div ng-repeat="size in sizes" ng-class="{'bg-black text-white': check.indexOf(size) !== -1, 'bg-gray-500': check.indexOf(size) === -1}">
+        <p>{{ size }}</p>
+      </div>
+      
+    </div>
   </body>
 </html>
